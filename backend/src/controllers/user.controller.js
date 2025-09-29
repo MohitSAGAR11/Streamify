@@ -52,7 +52,7 @@ export async function sendFriendRequest(req, res) {
     const recipient = await User.findById(recipientId);
     if (!recipient) {
       return res.status(404).json({ message: "Recipient not found" });
-    } 
+    }
 
     // check if user is already friends
     if (recipient.friends.includes(myId)) {
@@ -70,11 +70,9 @@ export async function sendFriendRequest(req, res) {
     });
 
     if (existingRequest) {
-      return res
-        .status(400)
-        .json({
-          message: "A friend request already exists between you and this user",
-        });
+      return res.status(400).json({
+        message: "A friend request already exists between you and this user",
+      });
     }
 
     const friendRequest = await FriendRequest.create({
@@ -85,6 +83,45 @@ export async function sendFriendRequest(req, res) {
     res.status(201).json(friendRequest);
   } catch (error) {
     console.error("Error in sendFriendRequest controller", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+export async function acceptFriendRequest(req, res) {
+  try {
+    const { id: requestId } = req.params;
+
+    // if freind request doesn't exist
+    const friendRequest = await FriendRequest.findById(requestId);
+
+    if (!friendRequest) {
+      return res.status(404).json({ message: "Friend request not found" });
+    }
+
+    // verify the current user is the recipient
+    if (friendRequest.recipient.toString() !== req.user.id) {
+      return res
+        .status(403)
+        .json({ message: "You are not authorized to accept this request" });
+    }
+
+    // accept friend request
+    friendRequest.status = "accepted";
+    await friendRequest.save();
+
+    // add recipient id as friend of sender and vice versa
+    // $addTOSet: adds elements to an array only if they do not already exist in them.
+    await User.findByIdAndUpdate(friendRequest.sender, {
+      $addToSet: { friends: friendRequest.recipient },
+    });
+
+    await User.findByIdAndUpdate(friendRequest.recipient, {
+      $addToSet: { friends: friendRequest.sender },
+    });
+
+    res.status(200).json({ message: "Friend request accepted" });
+  } catch (error) {
+    console.log("Error in acceptFriendRequest controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
