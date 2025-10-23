@@ -9,11 +9,7 @@ import CallPage from "./pages/CallPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import OnboardingPage from "./pages/OnboardingPage.jsx";
 import toast, { Toaster } from "react-hot-toast";
-// import { useQuery } from "@tanstack/react-query";
-// import { axiosInstance } from "./lib/axios.js";
 import PageLoader from "./components/PageLoader.jsx";
-import { get } from "mongoose";
-// import { getAuthUser } from "./lib/api.js";
 import useAuthUser from "./hooks/useAuthUser.js";
 
 const app = () => {

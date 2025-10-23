@@ -21,7 +21,10 @@ const SignUpPage = () => {
     error,
   } = useMutation({
     mutationFn: signup,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["authUser"] });
+    //   Navigate("/onboarding");
+    },
   });
 
   const handleSignup = (e) => {
@@ -44,13 +47,6 @@ const SignUpPage = () => {
               Streamify
             </span>
           </div>
-
-          {/* error message if any */}
-          {error && (
-            <div className="alert alert-error mb-4">
-              <span>{error.response.data.message}</span>
-            </div>
-          )}
 
           <div className="w-full">
             <form onSubmit={handleSignup}>
