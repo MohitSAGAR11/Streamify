@@ -36,11 +36,23 @@ const app = () => {
         />
         <Route
           path="/signup"
-          element={!isAuthenticated ? <SignUpPage /> : <Navigate to="/" />}
+          element={
+            !isAuthenticated ? (
+              <SignUpPage />
+            ) : (
+              <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+            )
+          }
         />
         <Route
           path="/login"
-          element={!isAuthenticated ? <LoginPage /> : <Navigate to="/" />}
+          element={
+            !isAuthenticated ? (
+              <LoginPage />
+            ) : (
+              <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+            )
+          }
         />
         <Route
           path="/notification"
@@ -58,7 +70,13 @@ const app = () => {
         />
         <Route
           path="/onboarding"
-          element={isAuthenticated && !isOnboarded ? <OnboardingPage /> : <Navigate to="/login" />}
+          element={
+            isAuthenticated && !isOnboarded ? (
+              <OnboardingPage />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
       </Routes>
       <Toaster />
