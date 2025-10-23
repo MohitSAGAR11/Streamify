@@ -8,7 +8,7 @@ router.post("/login", login);
 router.post("/logout", logout);
 
 // on-boarding
-router.post("/onboarding", protectRoute, onboard);
+router.post("/onboard", protectRoute, onboard);
 
 router.get("/me" , protectRoute ,  (req,res) => {
     res.status(200).json({ success : true , user: req.user})

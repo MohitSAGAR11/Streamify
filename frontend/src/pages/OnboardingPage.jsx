@@ -32,13 +32,14 @@ const OnboardingPage = () => {
     },
 
     onError: (error) => {
-      toast.error(error.response.data.message);
+        const message = error.response?.data?.message || "Onboarding failed. Please try again.";
+        toast.error(message);
+        console.error("Onboarding error:", error);
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     onboardingMutation(formState);
   };
 
