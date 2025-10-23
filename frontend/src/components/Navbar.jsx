@@ -1,21 +1,15 @@
 import { Link, useLocation } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
 import { BellIcon, LogOutIcon, ShipWheelIcon } from "lucide-react";
-// import ThemeSelector from "./ThemeSelector";
-// import useLogout from "../hooks/useLogout";
+import ThemeSelector from "./ThemeSelector";
+import useLogout from "../hooks/useLogout";
 
 const Navbar = () => {
   const { authUser } = useAuthUser();
   const location = useLocation();
   const isChatPage = location.pathname?.startsWith("/chat");
 
-  // const queryClient = useQueryClient();
-  // const { mutate: logoutMutation } = useMutation({
-  //   mutationFn: logout,
-  //   onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
-  // });
-
-//   const { logoutMutation } = useLogout();
+  const { logoutMutation } = useLogout();
 
   return (
     <nav className="bg-base-200 border-b border-base-300 sticky top-0 z-30 h-16 flex items-center">
@@ -42,7 +36,7 @@ const Navbar = () => {
           </div>
 
           {/* TODO */}
-          {/* <ThemeSelector /> */}
+          <ThemeSelector />
 
           <div className="avatar">
             <div className="w-9 rounded-full">
@@ -50,10 +44,10 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Logout button
+          {/* Logout button */}
           <button className="btn btn-ghost btn-circle" onClick={logoutMutation}>
             <LogOutIcon className="h-6 w-6 text-base-content opacity-70" />
-          </button> */}
+          </button>
         </div>
       </div>
     </nav>
