@@ -11,11 +11,12 @@ import OnboardingPage from "./pages/OnboardingPage.jsx";
 import toast, { Toaster } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "./lib/axios.js";
+import PageLoader from "./components/PageLoader.jsx";
 
 
 const app = () => {
 
-  const { data: authData, isLoading, error } = useQuery({
+  const { data: authData, isLoading} = useQuery({
     queryKey: ["authUser"],
     queryFn: async () => {
       const response = await axiosInstance.get("/auth/me");
@@ -26,10 +27,7 @@ const app = () => {
   const authUser = authData?.user;
 
   if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    toast.error(error.response.data.message);
+    return <PageLoader />;
   }
 
   return (
