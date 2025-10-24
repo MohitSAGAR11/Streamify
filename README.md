@@ -68,11 +68,10 @@ Create a `.env` file in the backend directory:
 
 ```env
 PORT = 5001
-MONGO_URL = mongodb+srv://mohitsagar378_db_user:oqikW1DulPNnqoCB@cluster0.vagzmx8.mongodb.net/streamify_db?retryWrites=true&w=majority&appName=Cluster0
-STREAM_API_KEY = q77qntyv3582
-STREAM_API_SECRET = 224npzrpr7qg7zg4skss7w9rrn4cpep36wczark786vunbgqrjxrpzx2zzjpgxx3
-JWT_SECRET_KEY = secretkey
-NODE_ENV=development
+MONGO_URL = ???
+STREAM_API_KEY = ???
+STREAM_API_SECRET = ???
+JWT_SECRET_KEY = ???
 ```
 
 ### Frontend (`/frontend`)
@@ -80,7 +79,7 @@ NODE_ENV=development
 Create a `.env` file in the frontend directory:
 
 ```env
-VITE_STREAM_API_KEY=q77qntyv3582
+VITE_STREAM_API_KEY=????
 ```
 
 ---
