@@ -55,6 +55,11 @@ A real-time chat and video calling application built for 1-on-1 and group conver
 
 ---
 
+🚀 Live Demo
+Backend API: https://streamify-n8va.onrender.com
+
+---
+
 ## 🧪 Environment Setup
 
 ### Backend (`/backend`)
