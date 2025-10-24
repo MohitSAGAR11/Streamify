@@ -6,6 +6,7 @@ const Sidebar = () => {
   const { authUser } = useAuthUser();
   const location = useLocation();
   const currentPath = location.pathname;
+  console.log(currentPath)
 
   return (
     <aside className="w-64 bg-base-200 border-r border-base-300 hidden lg:flex flex-col h-screen sticky top-0">
@@ -31,6 +32,7 @@ const Sidebar = () => {
 
         <Link
           to="/friends"
+          onClick={() => console.log("Friends link clicked")}
           className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
             currentPath === "/friends" ? "btn-active" : ""
           }`}
